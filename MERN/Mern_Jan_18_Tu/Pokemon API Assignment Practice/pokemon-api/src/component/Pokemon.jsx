@@ -5,7 +5,7 @@ const Pokemon = () => {
 
     const clickHandler = (e) => {
         e.preventDefault();
-        fetch('https://pokeapi.co/api/v2/pokemon/?limit=807&offset=1')
+        fetch('https://pokeapi.co/api/v2/pokemon/?limit=807&offset=0')
             .then(response => response.json())
             .then(response => setPokemonNames(response.results))
     }
