@@ -12,14 +12,17 @@ const Pokemon = () => {
 
     return (
         <div className='mx-auto text-center card'>
-            <div className="p-3">
+            <div className='centerlist'>
                 <h2> Fetch All 807 Pokemon</h2>
                 <button onClick={clickHandler} className='btn-info m-3'>Fetch Pokemon</button>
+                
+                <ul className='unorderedlist'>
                 {pokemonNames.length > 0 && pokemonNames.map((pokemon, i) => {
                     return (
-                        <p key={i} >{pokemon.name}</p>
+                        <li className='liststyle' key={i} >{pokemon.name}</li>
                     )
                 })}
+                </ul>
             </div>
         </div>
     )

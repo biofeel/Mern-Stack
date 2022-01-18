@@ -6,6 +6,21 @@
   list-style-type: circle;
 }
 
-p:first-letter {
-    text-transform:capitalize;
+li:first-letter {
+  text-transform:capitalize;
+}
+
+.unorderedlist {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+
+
+}
+
+.centerlist {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
