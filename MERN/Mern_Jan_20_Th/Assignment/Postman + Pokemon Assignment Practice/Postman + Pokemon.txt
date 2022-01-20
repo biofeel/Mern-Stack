@@ -1,0 +1,13 @@
+1. Make 5 different GET requests to retrieve 5 different pokemon
+
+2. Upload a text file with the requests you made or screenshots of the results
+
+- https://pokeapi.co/api/v2/pokemon/ditto
+
+- https://pokeapi.co/api/v2/pokemon/6
+
+- https://pokeapi.co/api/v2/pokemon/19
+
+- https://pokeapi.co/api/v2/pokemon/91
+
+- https://pokeapi.co/api/v2/pokemon/504
