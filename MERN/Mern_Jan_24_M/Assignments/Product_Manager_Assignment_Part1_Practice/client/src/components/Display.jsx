@@ -23,10 +23,10 @@ const Display = (props) => {
                     <div key ={i}>
                         <p><Link to={`/details/${product._id}`}>{product.title}</Link></p>
                         <DeleteButton id={product._id} reloadList={reloadList} />
+                        <Link to={`/edit/${product._id}`}>Edit</Link>
                     </div>
                 )): <p>Loading...</p>
             }
-
         </div>
     )
 

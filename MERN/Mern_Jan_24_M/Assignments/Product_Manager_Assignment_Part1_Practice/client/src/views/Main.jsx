@@ -1,6 +1,6 @@
 import Form from '../components/Form';
 import Display from '../components/Display';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 
 const Main = () => {
 
