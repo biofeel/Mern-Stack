@@ -1,20 +1,23 @@
 const mongoose = require('mongoose');
 const ProductSchema = new mongoose.Schema({
-    productName: { type: String },
-    productPrice: { type: Number },
-    productDescription: { type: String}
+    title: { 
+        type: String,
+        required: [true, "Title is required"],
+        minlength: [2, "Title must be at least 2 characters"]  
+    },
+    price: { 
+        type: Number,
+        required: [true, "Price is required"],
+        min: [0, "Price must be positive"],
+        max: [100, "Price must not be higher than 100"]  
+    },
+    description: { 
+        type: String,
+        required: [true, "Description is required"],
+        minlength: [5, "Description must be at least 5 characters"] 
+    }
 }, { timestamps: true });
-module.exports.Product = mongoose.model('Product', ProductSchema);
 
+const Product = mongoose.model('Product', ProductSchema);
 
-
-// const mongoose = require('mongoose');
-
-// const PersonSchema = new mongoose.Schema({
-//     firstName: {type: String},
-//     lastName: {type: String}
-// }, {timestamps: true});
-
-// const Person = mongoose.model('Person', PersonSchema)
-
-// module.exports = Person
+module.exports = Product

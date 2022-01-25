@@ -11,37 +11,32 @@ module.exports.index = (req, res) => {
     })
 }
 
-module.exports.findAllProducts = (req, res) => {
+module.exports.showAllProducts = (request, response) => {
     Product.find()
-        .then(allProducts => res.json({ products: allProducts }))
-        .catch(err => res.json({ message: "Something went wrong", error: err }));
-};
-
-module.exports.findOneProduct = (req, res) => {
-    Product.findOne({ _id: req.params.id })
-        .then(oneProduct => res.json({ product: oneProduct }))
-        .catch(err => res.json({ message: "Something went wrong", error: err }));
-};
-
-module.exports.createProduct = (request, response) => {
-    const { productName, productPrice, productDescription } = request.body;
-    Product.create({
-        productName,
-        productPrice,
-        productDescription
-    })
-        .then(product => response.json(product))
-        .catch(err => response.json(err))
+        .then(products =>response.json(products))
+        .catch(err =>response.json(err));
 }
 
-module.exports.updateProduct = (req, res) => {
-    Product.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
-        .then(updatedProduct => res.json({ product: updatedProduct }))
-        .catch(err => res.json({ message: "Something went wrong", error: err }));
-};
+module.exports.createProduct = (request, response) => {
+    Product.create(request.body)
+        .then(newProduct =>response.json(newProduct))
+        .catch(err =>response.status(400).json(err));
+}
 
-module.exports.deleteProduct = (req, res) => {
-    Product.deleteOne({ _id: req.params.id })
-        .then(result => res.json({ result: result }))
-        .catch(err => res.json({ message: "Something went wrong", error: err }));
-};
+module.exports.showOneProduct = (request, response) => {
+    Product.findOne({_id: request.params.id})
+    .then(product =>response.json(product))
+    .catch(err =>response.json(err));
+}
+
+module.exports.removeProduct = (request, response) => {
+    Product.deleteOne({_id: request.params.id})
+    .then(deleteConfirmation =>response.json(deleteConfirmation))
+    .catch(err => response.status(400).json(err));
+}
+
+module.exports.updateProduct = (request, response) => {
+    Product.updateOne({_id: request.params.id}, request.body, { new: true, runValidators: true })
+    .then(updateProduct =>response.json(updateProduct))
+    .catch(err =>response.status(400).json(err));
+}
