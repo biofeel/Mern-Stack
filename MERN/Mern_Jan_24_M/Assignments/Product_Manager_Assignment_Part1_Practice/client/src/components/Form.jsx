@@ -4,10 +4,11 @@ import axios from 'axios';
 
 const Form = (props) => {
 
-    const {reloadList} = props
+    const { reloadList } = props
     const [title, setTitle] = useState("");
-    const [price, setPrice] = useState(0);
+    const [price, setPrice] = useState("");
     const [description, setDescription] = useState("");
+    const [errors, setErrors] = useState([]); 
 
     const onSubmitHandler = e => {
         e.preventDefault();
@@ -16,29 +17,38 @@ const Form = (props) => {
             price,
             description
         })
-            .then(res=>{
+            .then(res => {
                 setTitle("")
-                setPrice(0)
+                setPrice("")
                 setDescription("")
                 reloadList()
             })
-            .catch(err=>console.log(err.response.data))
+            .catch(err => {
+                const errorResponse = err.response.data.errors; // Get the errors from err.response.data
+                const errorArr = []; // Define a temp error array to push the messages in
+                for (const key of Object.keys(errorResponse)) { // Loop through all errors and get the messages
+                    errorArr.push(errorResponse[key].message)
+                }
+                // Set Errors
+                setErrors(errorArr);
+            })
     }
 
     return (
         <form onSubmit={onSubmitHandler}>
             <h1>Product Manager</h1>
+            {errors.map((err, index) => <p key={index}>{err}</p>)}
             <p>
-                <label>Title</label><br/>
-                <input type="text" onChange={(e)=>setTitle(e.target.value)} value={title}/>
+                <label>Title</label><br />
+                <input type="text" onChange={(e) => setTitle(e.target.value)} value={title} />
             </p>
             <p>
-                <label>Price</label><br/>
-                <input type="text" onChange={(e)=>setPrice(e.target.value)} value={price}/>
+                <label>Price</label><br />
+                <input type="text" onChange={(e) => setPrice(e.target.value)} value={price} />
             </p>
             <p>
-                <label>Description</label><br/>
-                <input type="text" onChange={(e)=>setDescription(e.target.value)} value={description}/>
+                <label>Description</label><br />
+                <input type="text" onChange={(e) => setDescription(e.target.value)} value={description} />
             </p>
             <button> Submit</button>
         </form>
